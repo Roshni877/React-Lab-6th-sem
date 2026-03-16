@@ -1,3 +1,4 @@
+app.jsx
 import React, { useState } from "react";
 import "./index.css";
 import sampleimage from "./assets/sampleimage.jpg";
@@ -8,8 +9,10 @@ const ProfileCard = ({ name, bio, initialBg }) => {
   return (
     <div
       className="card"
-      style={{ background: bg }}
-      onMouseEnter={() => setBg("linear-gradient(135deg, #FFD700, #FFA07A)")}
+      style={{ backgroundImage: bg }}
+      onMouseEnter={() =>
+        setBg("linear-gradient(135deg, #FFD700, #FFA07A)")
+      }
       onMouseLeave={() => setBg(initialBg)}
     >
       <img src={sampleimage} alt={name} className="pic" />
@@ -36,43 +39,25 @@ export default function App() {
 
 
 
-css
+
+index.css
 .container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-family: Arial, sans-serif;
+  margin-top: 50px;
 }
 
 .card {
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  text-align: center;
   width: 300px;
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: scale(1.05);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  transition: background 0.3s ease;
 }
 
 .pic {
   width: 100px;
   height: 100px;
-  border-radius: 50%; /* Makes the image a circle */
+  border-radius: 50%;
   object-fit: cover;
-  border: 3px solid white;
 }
-
-h2 {
-  margin: 15px 0 5px;
-  color: #333;
-}
-
-p {
-  color: #666;
-  font-size: 0.9rem;
-}
-
