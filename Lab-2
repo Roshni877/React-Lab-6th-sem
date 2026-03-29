@@ -51,3 +51,8 @@ Header.propTypes = {
   title: PropTypes.string.isRequired, 
 }; 
 export default Header;
+
+
+
+install react developers tool
+at vs code  , go to inspect, performance>>, components or profile
