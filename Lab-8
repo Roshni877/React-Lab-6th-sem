@@ -1,0 +1,109 @@
+App.jsx:
+
+import { useState } from "react";
+import "./index.css";
+
+export default function App() {
+  const [name, setName] = useState("");
+  const [date, setDate] = useState("");
+  const [desc, setDesc] = useState("");
+  const [tasks, setTasks] = useState([]);
+  const [filter, setFilter] = useState("all");
+
+  const handleAdd = () => {
+    if (!name || !date) return;
+    setTasks([...tasks, { id: Date.now(), name, date, desc, done: false }]);
+    setName("");
+    setDate("");
+    setDesc("");
+  };
+
+  const toggleDone = (id) => {
+    setTasks(tasks.map((t) => (t.id === id ? { ...t, done: !t.done } : t)));
+  };
+
+  const filtered = tasks.filter((t) => {
+    if (filter === "done") return t.done;
+    if (filter === "notdone") return !t.done;
+    return true;
+  });
+
+  return (
+    <div className="container">
+      <h1>Remainder App</h1>
+      <input
+        type="text"
+        placeholder="name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <input
+        type="date"
+        value={date}
+        onChange={(e) => setDate(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="desc"
+        value={desc}
+        onChange={(e) => setDesc(e.target.value)}
+      />
+      <button onClick={handleAdd}>Add</button>
+      <button onClick={() => setFilter("all")}>all</button>
+      <button onClick={() => setFilter("done")}>done</button>
+      <button onClick={() => setFilter("notdone")}>notdone</button>
+      <ul>
+        {filtered.map((t) => (
+          <li
+            key={t.id}
+            onClick={() => toggleDone(t.id)}
+            className={t.done ? "done" : ""}
+          >
+            <strong>{t.name}</strong>-{t.date} |{t.desc}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+
+
+Index.css:
+
+/* Center everything properly */
+.container {
+  width: 400px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+/* Align inputs and buttons nicely */
+input, button {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+/* Fix list alignment */
+ul {
+  list-style-position: inside; /* keeps dots aligned with text */
+  padding: 0;
+  margin-top: 15px;
+  text-align: left;
+}
+
+/* List items */
+li {
+  padding: 8px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+/* Completed task */
+.done {
+  text-decoration: line-through;
+  color: gray;
+}
