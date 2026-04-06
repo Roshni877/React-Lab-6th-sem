@@ -1,0 +1,235 @@
+App.jsx:
+
+import react from 'react';
+import './App.css';
+import {Routes,Route,NavLink} from 'react-router-dom';
+import Home from './Home.jsx';
+import About from './About.jsx';
+import Contact from './Contact.jsx';
+ 
+function App(){
+  const linkStyle=({isActive}) => ({
+    margin:'0 10px',
+    textDecoration:'none',
+    color:isActive ? 'blue' : 'black',
+    fontWeight:isActive ? 'bold' : 'normal'
+  });
+  return(
+    <div>
+      <nav>
+        <NavLink to="/" style={linkStyle} end>Home</NavLink>
+        <NavLink to="/about" style={linkStyle}>About</NavLink>
+        <NavLink to="/contact" style={linkStyle}>Contact</NavLink>
+      </nav>
+      <hr/>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/about" element={<About/>}/>
+        <Route path="/contact" element={<Contact/>}/>
+      </Routes> 
+    </div>
+  );
+}
+export default App;
+
+
+Home.jsx:
+
+import React, { useState } from 'react';
+
+function Home() {
+  const [activeSection, setActiveSection] = useState('overview');
+
+  return (
+    <div className="container">
+      <h2>Home Page</h2>
+      <div style={{ display: 'flex', marginBottom: '20px' }}>
+        <button onClick={() => setActiveSection('overview')} style={{ marginRight: '10px' }}>
+          Overview
+        </button>
+        <button onClick={() => setActiveSection('services')} style={{ marginRight: '10px' }}>
+          Services
+        </button>
+        <button onClick={() => setActiveSection('news')}>
+          News
+        </button>
+      </div>
+
+      {activeSection === 'overview' && (
+        <div className="section">
+          <h3>Overview</h3>
+          <p>Welcome to our website! We provide modern solutions for your digital needs.</p>
+        </div>
+      )}
+      {activeSection === 'services' && (
+        <div className="section">
+          <h3>Services</h3>
+          <p>We offer web development, mobile app development, and cloud solutions.</p>
+        </div>
+      )}
+      {activeSection === 'news' && (
+        <div className="section">
+          <h3>Latest News</h3>
+          <p>Stay tuned for updates on our upcoming projects and collaborations.</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default Home;
+
+
+About.jsx:
+
+import React from 'react';
+
+function About() {
+  return (
+    <div className="container">
+      <h2>About Page</h2>
+      <div className="section">
+        <h3>Our Mission</h3>
+        <p>We aim to deliver high-quality web solutions that empower businesses and individuals.</p>
+      </div>
+      <div className="section">
+        <h3>Our Team</h3>
+        <p>We are a group of passionate developers, designers, and innovators working together.</p>
+      </div>
+      <div className="section">
+        <h3>Our Story</h3>
+        <p>Founded in 2020, we have grown into a trusted name in the industry.</p>
+      </div>
+    </div>
+  );
+}
+
+export default About;
+
+
+
+Contact.css:
+
+import React from 'react';
+
+function Contact() {
+  return (
+    <div className="container">
+      <h2>Contact Page</h2>
+      <div className="section">
+        <h3>Email</h3>
+        <p>contact@example.com</p>
+      </div>
+      <div className="section">
+        <h3>Phone</h3>
+        <p>+91 98765 43210</p>
+      </div>
+      <div className="section">
+        <h3>Address</h3>
+        <p>123 Main Street, Kapu, Karnataka, India</p>
+      </div>
+    </div>
+  );
+}
+
+export default Contact;
+
+
+
+App.css:
+/* General Reset */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f8ff; /* light blue background */
+}
+
+/* Navigation Bar */
+nav {
+  background-color: #0077cc; /* primary blue */
+  padding: 10px;
+  border-bottom: 2px solid #005fa3;
+}
+
+nav a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #fff; /* white text */
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #ffdd57; /* golden yellow hover */
+}
+
+nav a.active {
+  color: #ffdd57;
+  font-weight: bold;
+}
+
+/* Page Container */
+.container {
+  padding: 20px;
+}
+
+/* Section Styling */
+.section {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.section h3 {
+  margin-top: 0;
+  color: #0077cc; /* section title blue */
+}
+
+/* Home Page Tab-like Buttons */
+.tab-buttons {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.tab-buttons button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  border: 1px solid #0077cc;
+  background-color: #e6f2ff; /* light blue background */
+  color: #0077cc;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.tab-buttons button:hover {
+  background-color: #0077cc;
+  color: #fff;
+}
+
+.tab-buttons button.active {
+  background-color: #005fa3; /* darker blue when active */
+  color: #fff;
+  font-weight: bold;
+}
+
+
+main.jsx:
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.jsx';
+import { BrowserRouter } from 'react-router-dom';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
+
+
+
+
